@@ -1,14 +1,16 @@
 package com.example.AEPB.parklot;
 
-import com.example.AEPB.parklot.exception.UserTokenCollisionException;
+import com.example.AEPB.parklot.exception.GenerateTokenCollisionException;
+import com.example.AEPB.parklot.exception.InvalidUserTokenException;
+import com.example.AEPB.parklot.exception.ParkLotFullException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SimpleParkLot implements ParkLotFunction{
-    private static final int MAX_TOKEN_COLLISION = 3;
 
-    private Map<UserToken, Credential> credentials;
+    private Map<Credential, Car> credentials;
     private Integer maxPlot;
     private TokenGenerator tokenGenerator;
 
@@ -28,11 +30,10 @@ public class SimpleParkLot implements ParkLotFunction{
         if(token == null) {
             throw new IllegalArgumentException();
         }
-        if(!checkTokenExistence(token)) {
-            return null;
-        }
-        Credential credential = credentials.remove(token);
-        return credential.getCar();
+
+        return credentials.remove(checkTokenExistence(token).orElseThrow(() -> {
+            throw new InvalidUserTokenException();
+        }));
     }
 
     @Override
@@ -41,22 +42,22 @@ public class SimpleParkLot implements ParkLotFunction{
             throw new IllegalArgumentException();
         }
         if(credentials.size() >= maxPlot) {
-            return null;
+            throw new ParkLotFullException();
         }
-        Credential cr = new Credential(car, tokenGenerator);
-        int collision = 0;
-        while(checkTokenExistence(cr.getToken())) {
-            if(++collision >= MAX_TOKEN_COLLISION) {
-                throw new UserTokenCollisionException();
-            }
-            cr = new Credential(car, tokenGenerator);
+        Credential cr = new Credential(tokenGenerator);
+        if(checkTokenExistence(cr.getToken()).isPresent()) {
+            throw new GenerateTokenCollisionException();
         }
-        credentials.put(cr.getToken(), cr);
+
+        credentials.put(cr, car);
         return cr.getToken();
     }
 
     @Override
-    public boolean checkTokenExistence(UserToken token) {
-        return credentials.containsKey(token);
+    public Optional<Credential> checkTokenExistence(UserToken token) {
+        return credentials.keySet().stream()
+                .filter(credential ->
+                        credential.getToken().equals(token))
+                .findFirst();
     }
 }

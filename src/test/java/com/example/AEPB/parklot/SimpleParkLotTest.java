@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SimpleParkLotTest {
@@ -31,7 +30,7 @@ public class SimpleParkLotTest {
     }
 
     @Test
-    void should_return_null_when_parking_car_given_full_parking_lot() {
+    void should_throw_exception_when_parking_car_given_full_parking_lot() {
         // given
         // can not get and mock private variables
 //        when(parkLot.getCredentials().size()).thenReturn(ParkLotFactory.SIMPLE_PARK_LOT_POSITION);
@@ -40,10 +39,8 @@ public class SimpleParkLotTest {
         }
 
         // when
-        UserToken token = parkLot.park(getACar());
+        assertThrows(Exception.class, () -> parkLot.park(getACar()));
 
-        // then
-        assertNull(token);
     }
 
     @Test
@@ -62,12 +59,10 @@ public class SimpleParkLotTest {
     }
 
     @Test
-    void should_return_null_when_get_car_given_token_not_exist() {
+    void should_throw_exception_when_get_car_given_token_not_exist() {
         parkLot.park(getACar());
 
-        Car car = parkLot.getCar(new UserToken("obviouseNotExistToken"));
-
-        assertNull(car);
+        assertThrows(Exception.class, () -> parkLot.getCar(new UserToken("obviouseNotExistToken")));
     }
 
     @Test
