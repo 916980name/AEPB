@@ -1,5 +1,7 @@
 package com.example.AEPB.parklot;
 
+import com.example.AEPB.parklot.simpleparklot.SimpleParkLot;
+import com.example.AEPB.parklot.simpleparklot.UserToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,7 @@ public class SimpleParkLotTest {
 
     @Test
     void should_return_token_when_parking_car_given_parking_lot_available() {
-        UserToken token = parkLot.park(getACar());
+        Token token = parkLot.park(getACar());
 
         assertNotNull(token);
         assertNotNull(token.getToken());
@@ -67,7 +69,7 @@ public class SimpleParkLotTest {
 
     @Test
     void should_return_car_when_get_car_given_exist_token() {
-        UserToken token = parkLot.park(getACar());
+        Token token = parkLot.park(getACar());
 
         Car car = parkLot.getCar(token);
 

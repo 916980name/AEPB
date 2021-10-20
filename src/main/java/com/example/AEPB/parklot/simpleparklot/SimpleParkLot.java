@@ -1,5 +1,10 @@
-package com.example.AEPB.parklot;
+package com.example.AEPB.parklot.simpleparklot;
 
+import com.example.AEPB.parklot.Car;
+import com.example.AEPB.parklot.Credential;
+import com.example.AEPB.parklot.ParkFunction;
+import com.example.AEPB.parklot.Token;
+import com.example.AEPB.parklot.TokenGenerator;
 import com.example.AEPB.parklot.exception.GenerateTokenCollisionException;
 import com.example.AEPB.parklot.exception.InvalidUserTokenException;
 import com.example.AEPB.parklot.exception.ParkLotFullException;
@@ -8,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SimpleParkLot implements ParkLotFunction{
+public class SimpleParkLot implements ParkFunction {
 
     private Map<Credential, Car> credentials;
     private Integer maxPlot;
@@ -26,7 +31,7 @@ public class SimpleParkLot implements ParkLotFunction{
     }
 
     @Override
-    public Car getCar(UserToken token) {
+    public Car getCar(Token token) {
         if(token == null) {
             throw new IllegalArgumentException();
         }
@@ -37,7 +42,7 @@ public class SimpleParkLot implements ParkLotFunction{
     }
 
     @Override
-    public UserToken park(Car car) {
+    public Token park(Car car) {
         if(car == null) {
             throw new IllegalArgumentException();
         }
@@ -54,10 +59,15 @@ public class SimpleParkLot implements ParkLotFunction{
     }
 
     @Override
-    public Optional<Credential> checkTokenExistence(UserToken token) {
+    public Optional<Credential> checkTokenExistence(Token token) {
         return credentials.keySet().stream()
                 .filter(credential ->
                         credential.getToken().equals(token))
                 .findFirst();
+    }
+
+    @Override
+    public int checkEmptySlot() {
+        return this.maxPlot - this.credentials.size();
     }
 }

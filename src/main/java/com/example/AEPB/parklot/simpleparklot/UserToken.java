@@ -1,6 +1,8 @@
-package com.example.AEPB.parklot;
+package com.example.AEPB.parklot.simpleparklot;
 
-public class UserToken {
+import com.example.AEPB.parklot.Token;
+
+public class UserToken implements Token {
     private String token;
 
     private UserToken() {}
@@ -12,6 +14,7 @@ public class UserToken {
         this.token = token;
     }
 
+    @Override
     public String getToken() {
         return token;
     }

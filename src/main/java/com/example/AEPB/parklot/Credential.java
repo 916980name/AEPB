@@ -1,7 +1,8 @@
 package com.example.AEPB.parklot;
 
+
 public class Credential {
-    private UserToken token;
+    private Token token;
 
     private Credential() {}
 
@@ -12,7 +13,7 @@ public class Credential {
         this.token = tokenGenerator.generateToken();
     }
 
-    public UserToken getToken() {
+    public Token getToken() {
         return token;
     }
 }

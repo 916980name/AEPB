@@ -1,7 +1,8 @@
 package com.example.AEPB.parklot;
 
-public interface TokenGenerator {
-    UserToken generateToken();
 
-//    setParkLotContext()
+public interface TokenGenerator {
+    Token generateToken();
+
+    void setParkLotContext(ParkLotContext context);
 }
