@@ -4,10 +4,8 @@ import com.example.AEPB.parklot.AbstractParkLot;
 
 import java.util.List;
 
-public class ParkingBoy extends SimpleBrain {
-
-    public ParkingBoy(List<AbstractParkLot> parkingLotList) {
+public class SmartParkingBoy extends SmartBrain {
+    public SmartParkingBoy(List<AbstractParkLot> parkingLotList) {
         super(parkingLotList);
     }
-
 }

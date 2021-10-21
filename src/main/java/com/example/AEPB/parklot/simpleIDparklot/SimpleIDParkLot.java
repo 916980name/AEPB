@@ -2,7 +2,6 @@ package com.example.AEPB.parklot.simpleIDparklot;
 
 import com.example.AEPB.parklot.Car;
 import com.example.AEPB.parklot.Credential;
-import com.example.AEPB.parklot.ParkLotContext;
 import com.example.AEPB.parklot.Token;
 import com.example.AEPB.parklot.TokenGenerator;
 import com.example.AEPB.parklot.exception.InvalidUserTokenException;
@@ -11,7 +10,7 @@ import com.example.AEPB.parklot.simpleparklot.SimpleParkLot;
 
 import java.util.Optional;
 
-public class SimpleIDParkLot extends SimpleParkLot implements ParkLotContext {
+public class SimpleIDParkLot extends SimpleParkLot {
     private String id;
 
     @Override

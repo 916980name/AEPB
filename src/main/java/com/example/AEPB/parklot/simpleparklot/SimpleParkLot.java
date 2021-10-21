@@ -1,8 +1,8 @@
 package com.example.AEPB.parklot.simpleparklot;
 
+import com.example.AEPB.parklot.AbstractParkLot;
 import com.example.AEPB.parklot.Car;
 import com.example.AEPB.parklot.Credential;
-import com.example.AEPB.parklot.ParkFunction;
 import com.example.AEPB.parklot.Token;
 import com.example.AEPB.parklot.TokenGenerator;
 import com.example.AEPB.parklot.exception.GenerateTokenCollisionException;
@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SimpleParkLot implements ParkFunction {
+public class SimpleParkLot extends AbstractParkLot {
+    private static final String id = "1";
 
     private Map<Credential, Car> credentials;
     private Integer maxPlot;
@@ -69,5 +70,10 @@ public class SimpleParkLot implements ParkFunction {
     @Override
     public int checkEmptySlot() {
         return this.maxPlot - this.credentials.size();
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }
