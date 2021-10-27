@@ -5,12 +5,12 @@ import com.example.AEPB.parklot.AbstractParkLot;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public abstract class AbstractParkingBoyBrain implements Brain {
+public abstract class AbstractParkingBrain implements Brain {
     private WeakReference<List<AbstractParkLot>> parkingLotList;
 
-    private AbstractParkingBoyBrain() {}
+    private AbstractParkingBrain() {}
 
-    public AbstractParkingBoyBrain(List<AbstractParkLot> parkingLotList) {
+    public AbstractParkingBrain(List<AbstractParkLot> parkingLotList) {
         this.parkingLotList = new WeakReference<>(parkingLotList);
     }
 

@@ -15,4 +15,8 @@ public class ParkLotFactory {
     public static SimpleIDParkLot getSimpleIDParkLot(String id) {
         return new SimpleIDParkLot(SIMPLE_PARK_LOT_POSITION, new SimpleIDTokenGenerator(), id);
     }
+
+    public static SimpleIDParkLot getSimpleIDParkLotWithParkingSlot(String id, int slotCount) {
+        return new SimpleIDParkLot(slotCount, new SimpleIDTokenGenerator(), id);
+    }
 }

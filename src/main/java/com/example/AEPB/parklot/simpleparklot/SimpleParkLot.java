@@ -76,4 +76,9 @@ public class SimpleParkLot extends AbstractParkLot {
     public String getId() {
         return id;
     }
+
+    @Override
+    public int countAllSlot() {
+        return this.maxPlot;
+    }
 }
