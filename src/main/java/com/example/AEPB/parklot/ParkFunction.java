@@ -11,5 +11,5 @@ public interface ParkFunction {
 
     Optional<Credential> checkTokenExistence(Token token);
 
-    int checkEmptySlot();
+    int countEmptySlot();
 }

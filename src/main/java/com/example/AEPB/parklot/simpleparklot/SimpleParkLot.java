@@ -68,7 +68,7 @@ public class SimpleParkLot extends AbstractParkLot {
     }
 
     @Override
-    public int checkEmptySlot() {
+    public int countEmptySlot() {
         return this.maxPlot - this.credentials.size();
     }
 

@@ -1,8 +1,6 @@
 package com.example.AEPB.parklot;
 
-import com.example.AEPB.parkingboy.ParkingBoy;
 import com.example.AEPB.parkingboy.SmartParkingBoy;
-import com.example.AEPB.parklot.simpleIDparklot.UserParkIDToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,11 +42,11 @@ public class SmartParkingBoyTest {
         Token token = parkingBoy.park(car);
 
         assertFalse(token.getToken().isEmpty());
-        assertEquals(9, parkingLots.get(9).checkEmptySlot());
+        assertEquals(9, parkingLots.get(9).countEmptySlot());
     }
 
     @Test
-    void should_park_to_parklot_5_when_park_by_parking_boy_given_parklots_remain_slot_is_4_5_6_7_10_3_10_2_1_10() {
+    void should_park_to_parklot_5_when_park_by_parking_boy_given_parklots_5_and_other_two_parklot_have_most_remain_slots_than_others() {
         Car car = new Car("1111");
         fillInParkingLot(0, 50 - 4);
         fillInParkingLot(1, 50 - 5);
@@ -64,7 +62,7 @@ public class SmartParkingBoyTest {
         Token token = parkingBoy.park(car);
 
         assertFalse(token.getToken().isEmpty());
-        assertEquals(9, parkingLots.get(4).checkEmptySlot());
+        assertEquals(9, parkingLots.get(4).countEmptySlot());
     }
 
     @Test

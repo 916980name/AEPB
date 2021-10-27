@@ -50,7 +50,7 @@ public class SimpleIDParkLotTest {
         Token token = parkingBoy.park(car);
 
         assertFalse(token.getToken().isEmpty());
-        assertEquals(4, parkingLots.get(0).checkEmptySlot());
+        assertEquals(4, parkingLots.get(0).countEmptySlot());
     }
 
     @Test
